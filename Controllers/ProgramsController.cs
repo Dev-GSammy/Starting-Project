@@ -85,20 +85,24 @@ namespace StartingProjectDemo.Controller
             {
                 var programs = await data.Programs.ToListAsync();
                 Console.WriteLine("");
-                var programsDto = await data.Programs.ProjectTo<ProgramsDto>(mapper.ConfigurationProvider).ToListAsync();
+                //var programsDto = await data.Programs.ProjectTo<ProgramsDto>(mapper.ConfigurationProvider).ToListAsync();
+                
 
-                foreach (var p in programsDto)
+                foreach (var p in programs)
                 {
                     Console.WriteLine("Program Id : " + p.Id);
                     Console.WriteLine("Program Title : " + p.Title);
                     Console.WriteLine("Program Summary : " + p.Summary);
-                    Console.WriteLine("Skills : " + p.Skills);
                     Console.WriteLine("Program Type : " + p.programType);
                     Console.WriteLine("Program Start Date : " + p.programStartDate);
                     Console.WriteLine("Program Duration : " + p.Duration);
                     Console.WriteLine("Program Location : " + p.programLocation);
                     Console.WriteLine("--------------------------------\n");
                 }
+            }
+            else
+            {
+                Console.WriteLine("data.Programs is null");
             }
         }
         #endregion
@@ -110,12 +114,16 @@ namespace StartingProjectDemo.Controller
             {
                 var program = await data.Programs
                     .FirstOrDefaultAsync(e => e.Id == Id);
-                var programsDto = mapper.Map<ProgramsDto>(program);
+                //var programsDto = mapper.Map<ProgramsDto>(program);
                 Console.WriteLine("");
 
-                Console.WriteLine("Program Title : " + programsDto?.Title);
-                Console.WriteLine("Program Summary : " + programsDto?.Summary);
-                Console.WriteLine("Program Description : " + programsDto?.programDescription);
+                Console.WriteLine("Program Title : " + program?.Title);
+                Console.WriteLine("Program Summary : " + program?.Summary);
+                Console.WriteLine("Program Description : " + program?.programDescription);
+                Console.WriteLine("Program Type : " + program.programType);
+                Console.WriteLine("Program Start Date : " + program.programStartDate);
+                Console.WriteLine("Program Duration : " + program.Duration);
+                Console.WriteLine("Program Location : " + program.programLocation);
                 Console.WriteLine("--------------------------------\n");
             }
         }

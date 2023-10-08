@@ -1,16 +1,20 @@
 ﻿using AutoMapper;
-using StartingProjectDemo.DTOs;
+using Starting_Project.DTOs;
 using StartingProjectDemo.Models;
-using System.Runtime.CompilerServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Starting_Project.Mappers
 {
-    public class Mappers
+    public class SkillsMapper
     {
-        public Mappers()
+        public SkillsMapper()
         {
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<Programs, ProgramsDto>();
+                cfg.CreateMap<Skills, SkillsDto>().ReverseMap();
                 //cfg.CreateMap<Skills, Skills>();
             });
             var mapper = config.CreateMapper();
