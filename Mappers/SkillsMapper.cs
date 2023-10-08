@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Starting_Project.DTOs;
-using StartingProjectDemo.Models;
+using Starting_Project.Models;
 
 
 namespace Starting_Project.Mappers

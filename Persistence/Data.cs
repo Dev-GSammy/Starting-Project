@@ -1,20 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Cosmos;
-using StartingProjectDemo.Models;
+using Starting_Project.Models;
 
 
 
-namespace StartingProjectDemo.Persistence
+
+namespace Starting_Project.Persistence
 {
     public class Data : DbContext
     {
         //creating Dbsets
         public DbSet<Programs>? Programs { get; set; }
+        public DbSet<ApplicationForm>? ApplicationForm { get; set; }
 
         //onconfiguring
         protected override void OnConfiguring(DbContextOptionsBuilder OptionsBuilder)
@@ -32,12 +28,14 @@ namespace StartingProjectDemo.Persistence
                     .ToContainer("Programs")
                     .HasPartitionKey(e => e.Id);
 
-            //    // configuring Customers
-            //    modelBuilder.Entity<Customer>()
-            //        .ToContainer("Customers") // ToContainer
-            //        .HasPartitionKey(c => c.Id); // Partition Key
+            // configuring ApplicationForm
+            modelBuilder.Entity<ApplicationForm>()
+                .ToContainer("ApplicationForm") // ToContainer
+                .HasPartitionKey(c => c.Id); // Partition Key
 
             modelBuilder.Entity<Programs>().OwnsMany(p => p.Skills);
+            modelBuilder.Entity<ApplicationForm>().OwnsMany(p => p.experience);
+            modelBuilder.Entity<ApplicationForm>().OwnsMany(p => p.education);
         }
     }
 }

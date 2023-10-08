@@ -1,6 +1,6 @@
 ﻿
 
-namespace StartingProjectDemo.DTOs
+namespace Starting_Project.DTOs
 {
     public class ProgramsDto
     {

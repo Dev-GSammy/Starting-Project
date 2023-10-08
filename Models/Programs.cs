@@ -1,6 +1,6 @@
 ﻿
 
-namespace StartingProjectDemo.Models
+namespace Starting_Project.Models
 {
     public class Programs
     {

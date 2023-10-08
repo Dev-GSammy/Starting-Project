@@ -1,30 +1,28 @@
 ﻿using System;
-using StartingProjectDemo.Controller;
+using Starting_Project.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Starting_Project.Mappers;
+using Starting_Project.Controller;
+using Starting_Project.Persistence;
+using AutoMapper;
 
 public class Program
 {
-    private readonly ProgramsController programsController;
-    public Program(ProgramsController _programsController)
+    public static async Task Main(string[] args)
     {
-        programsController = _programsController;
-
+        await RunInstructionsAsync();
     }
-    public async Task RunInstructionsAsync()
+    public static async Task RunInstructionsAsync()
     {
+        ProgramsController programsController = new ProgramsController();
+        #region ProgramController Test
         //await programsController.InsertProgramsAsync(); //Uncomment and run any of the methods as you will
-        //await programsController.GetPrograms();
-        //await programsController.GetProgram("03be52db-3874-43bf-a5a9-1dd020ebb277");
-        //await programsController.UpdateProgram("07e0bf8e-afdb-4d8f-9a41-1b689131efc8");
-    }
-    static async Task Main()
-    {
-        ProgramsMapper programsMapper = new ProgramsMapper();   //Instance of the ProgramsMapper
-        programsMapper.CreateMapper();
-        var programsController = new ProgramsController(); //I created an instance of the ProgramsController
-        var program = new Program(programsController); // I created an instance of the Program class
-        await program.RunInstructionsAsync();
+        //await programsController.GetProgramsAsync();
+        await programsController.GetProgramAsync("03be52db-3874-43bf-a5a9-1dd020ebb277");
+        //await programsController.UpdateProgramAsync("07e0bf8e-afdb-4d8f-9a41-1b689131efc8");
+        #endregion
+
+
     }
 }
 

@@ -1,23 +1,18 @@
-﻿using StartingProjectDemo.Persistence;
+﻿using Starting_Project.Persistence;
 using AutoMapper;
-using StartingProjectDemo.Models;
+using Starting_Project.DTOs;
+using Starting_Project.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Azure.Cosmos.Linq;
-using System;
-using StartingProjectDemo.DTOs;
-using AutoMapper.QueryableExtensions;
+using Starting_Project.Mappers;
 
 
-namespace StartingProjectDemo.Controller
+
+namespace Starting_Project.Controller
 {
     public class ProgramsController
     {
         private readonly Data data;
         private readonly Mapper mapper;
-        public ProgramsController()
-        {
-            data = new Data();
-        }
         public ProgramsController(Data _data, Mapper _mapper)
         {
             data = _data;
@@ -77,7 +72,7 @@ namespace StartingProjectDemo.Controller
         #endregion
 
         #region Get Programs
-        public async Task GetPrograms()
+        public async Task GetProgramsAsync()
         {
 
 
@@ -108,13 +103,13 @@ namespace StartingProjectDemo.Controller
         #endregion
 
         #region Get a Program
-        public async Task GetProgram(string Id)
+        public async Task GetProgramAsync(string Id)
         {
             if (data.Programs != null)
             {
                 var program = await data.Programs
                     .FirstOrDefaultAsync(e => e.Id == Id);
-                //var programsDto = mapper.Map<ProgramsDto>(program);
+                var programsDto = mapper.Map<ProgramsDto>(program);
                 Console.WriteLine("");
 
                 Console.WriteLine("Program Title : " + program?.Title);
@@ -130,7 +125,7 @@ namespace StartingProjectDemo.Controller
         #endregion
 
         #region Update a program
-        public async Task UpdateProgram(string Id)
+        public async Task UpdateProgramAsync(string Id)
         {
             if (data.Programs != null)
             {

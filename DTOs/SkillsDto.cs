@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using StartingProjectDemo.DTOs;
-using StartingProjectDemo.Models;
+using Starting_Project.DTOs;
+using Starting_Project.Models;
 using System.Runtime.CompilerServices;
 
 namespace Starting_Project.DTOs
