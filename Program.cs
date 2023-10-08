@@ -14,7 +14,7 @@ public class Program
     public async Task RunInstructionsAsync()
     {
         //await programsController.InsertProgramsAsync(); //Uncomment and run any of the methods as you will
-        await programsController.GetPrograms();
+        //await programsController.GetPrograms();
         //await programsController.GetProgram("03be52db-3874-43bf-a5a9-1dd020ebb277");
         //await programsController.UpdateProgram("07e0bf8e-afdb-4d8f-9a41-1b689131efc8");
     }
