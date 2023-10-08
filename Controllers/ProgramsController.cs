@@ -1,8 +1,11 @@
 ﻿using StartingProjectDemo.Persistence;
+using AutoMapper;
 using StartingProjectDemo.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Azure.Cosmos.Linq;
 using System;
+using StartingProjectDemo.DTOs;
+using AutoMapper.QueryableExtensions;
 
 
 namespace StartingProjectDemo.Controller
@@ -10,13 +13,15 @@ namespace StartingProjectDemo.Controller
     public class ProgramsController
     {
         private readonly Data data;
+        private readonly Mapper mapper;
         public ProgramsController()
         {
             data = new Data();
         }
-        public ProgramsController(Data _data)
+        public ProgramsController(Data _data, Mapper _mapper)
         {
             data = _data;
+            mapper = _mapper;
         }
 
         #region Insert Programs
@@ -66,11 +71,8 @@ namespace StartingProjectDemo.Controller
             };
             data.Programs?.Add(programs1);
             data.Programs?.Add(programs2);
-
             await data.SaveChangesAsync();
-
             Console.WriteLine("Program records inserted successfully...");
-
         }
         #endregion
 
@@ -83,24 +85,18 @@ namespace StartingProjectDemo.Controller
             {
                 var programs = await data.Programs.ToListAsync();
                 Console.WriteLine("");
+                var programsDto = await data.Programs.ProjectTo<ProgramsDto>(mapper.ConfigurationProvider).ToListAsync();
 
-                foreach (var p in programs)
+                foreach (var p in programsDto)
                 {
                     Console.WriteLine("Program Id : " + p.Id);
                     Console.WriteLine("Program Title : " + p.Title);
                     Console.WriteLine("Program Summary : " + p.Summary);
                     Console.WriteLine("Skills : " + p.Skills);
-                    Console.WriteLine("Program Benefits : " + p.Benefits);
-                    Console.WriteLine("Application Criteria : " + p.applicationCriteria);
                     Console.WriteLine("Program Type : " + p.programType);
                     Console.WriteLine("Program Start Date : " + p.programStartDate);
-                    Console.WriteLine("Application Open Date : " + p.applicationOpenDate);
-                    Console.WriteLine("Application Close Date : " + p.applicationCloseDate);
                     Console.WriteLine("Program Duration : " + p.Duration);
                     Console.WriteLine("Program Location : " + p.programLocation);
-                    Console.WriteLine("Minimum Qualification : " + p.minQualification);
-                    Console.WriteLine("Maximum Applications : " + p.maxApplications);
-
                     Console.WriteLine("--------------------------------\n");
                 }
             }
@@ -114,12 +110,12 @@ namespace StartingProjectDemo.Controller
             {
                 var program = await data.Programs
                     .FirstOrDefaultAsync(e => e.Id == Id);
-
+                var programsDto = mapper.Map<ProgramsDto>(program);
                 Console.WriteLine("");
 
-                Console.WriteLine("Program Title : " + program?.Title);
-                Console.WriteLine("Program Summary : " + program?.Summary);
-                Console.WriteLine("Program Description : " + program?.programDescription);
+                Console.WriteLine("Program Title : " + programsDto?.Title);
+                Console.WriteLine("Program Summary : " + programsDto?.Summary);
+                Console.WriteLine("Program Description : " + programsDto?.programDescription);
                 Console.WriteLine("--------------------------------\n");
             }
         }
