@@ -13,6 +13,10 @@ namespace Starting_Project.Controller
     {
         private readonly Data data;
         private readonly Mapper mapper;
+        public ProgramsController()
+        {
+            
+        }
         public ProgramsController(Data _data, Mapper _mapper)
         {
             data = _data;

@@ -15,14 +15,20 @@ public class Program
     public static async Task RunInstructionsAsync()
     {
         ProgramsController programsController = new ProgramsController();
+        ApplicationFormController applicationFormController = new ApplicationFormController();
         #region ProgramController Test
         //await programsController.InsertProgramsAsync(); //Uncomment and run any of the methods as you will
         //await programsController.GetProgramsAsync();
-        await programsController.GetProgramAsync("03be52db-3874-43bf-a5a9-1dd020ebb277");
+        //await programsController.GetProgramAsync("03be52db-3874-43bf-a5a9-1dd020ebb277");
         //await programsController.UpdateProgramAsync("07e0bf8e-afdb-4d8f-9a41-1b689131efc8");
         #endregion
 
-
+        #region ApplicationForm Controller Test
+        await applicationFormController.InsertApplicationFormAsync(); //Uncomment and run any of the methods as you will
+        //await applicationFormController.GetApplicationFormsAsync();
+        //await applicationFormController.GetApplicationFormAsync("03be52db-3874-43bf-a5a9-1dd020ebb277");
+        //await applicationFormController.UpdateApplicationFormAsync("07e0bf8e-afdb-4d8f-9a41-1b689131efc8");
+        #endregion
     }
 }
 
