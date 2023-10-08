@@ -26,12 +26,12 @@ namespace Starting_Project.Persistence
             // configuring Programs
             modelBuilder.Entity<Programs>()
                     .ToContainer("Programs")
-                    .HasPartitionKey(e => e.Id);
+                    .HasPartitionKey(p => p.Id);
 
             // configuring ApplicationForm
             modelBuilder.Entity<ApplicationForm>()
                 .ToContainer("ApplicationForm") // ToContainer
-                .HasPartitionKey(c => c.Id); // Partition Key
+                .HasPartitionKey(a=> a.Id); // Partition Key
 
             modelBuilder.Entity<Programs>().OwnsMany(p => p.Skills);
             modelBuilder.Entity<ApplicationForm>().OwnsMany(p => p.experience);

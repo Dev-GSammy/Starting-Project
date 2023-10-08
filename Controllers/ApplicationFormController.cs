@@ -14,7 +14,7 @@ namespace Starting_Project.Controllers
         private readonly Mapper mapper;
         public ApplicationFormController()
         {
-            
+            data = new Data();
         }
         public ApplicationFormController(Data _data, Mapper _mapper)
         {
@@ -25,7 +25,7 @@ namespace Starting_Project.Controllers
         #region Insert Application Form
         public async Task InsertApplicationFormAsync()
         {
-            var applicationForm1 = new Models.ApplicationForm()
+            var applicationForm1 = new ApplicationForm()
             {
                 Id = Guid.NewGuid().ToString(),
                 image = "",
@@ -77,11 +77,15 @@ namespace Starting_Project.Controllers
             {
                 var applicationform = await data.ApplicationForm
                     .FirstOrDefaultAsync(e => e.Id == Id);
-                var applicationFormDto = mapper.Map<DTOs.ApplicationForm>(applicationform);
+                //var applicationFormDto = mapper.Map<DTOs.ApplicationForm>(applicationform); //mapping to the dto file
                 Console.WriteLine("");
                 Console.WriteLine("First Name : " + applicationform?.firstName);
                 Console.WriteLine("Last Name : " + applicationform?.lastName);
                 Console.WriteLine("ID Number : " + applicationform?.idNumber);
+            }
+            else
+            {
+                Console.WriteLine("data.ApplicationForm is null");
             }
         }
         #endregion

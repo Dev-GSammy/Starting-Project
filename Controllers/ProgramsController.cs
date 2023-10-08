@@ -15,7 +15,7 @@ namespace Starting_Project.Controller
         private readonly Mapper mapper;
         public ProgramsController()
         {
-            
+            data = new Data();
         }
         public ProgramsController(Data _data, Mapper _mapper)
         {
